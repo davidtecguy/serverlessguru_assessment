@@ -71,6 +71,3 @@ custom:
     - prod
   serverless-offline:
     httpPort: 3000
-
-plugins:
-  - ${opt:stage, 'dev'} == 'dev' ? 'serverless-offline' : 
