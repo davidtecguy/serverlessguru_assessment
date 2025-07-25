@@ -1,0 +1,34 @@
+{
+  "name": "your-project",
+  "version": "1.0.0",
+  "description": "Serverless CRUD API with AWS Lambda, API Gateway, and DynamoDB",
+  "main": "src/handlers/createItem.ts",
+  "scripts": {
+    "test": "jest",
+    "test:unit": "jest tests/unit",
+    "test:integration": "jest tests/integration"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidtecguy/serverlessguru_assessment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidtecguy/serverlessguru_assessment/issues"
+  },
+  "homepage": "https://github.com/davidtecguy/serverlessguru_assessment#readme",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "typescript": "^5.8.3",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "aws-sdk-client-mock": "^4.1.0",
+    "serverless-dynamodb-local": "^0.2.40"
+  }
+}

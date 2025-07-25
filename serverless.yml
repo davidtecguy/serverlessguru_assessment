@@ -1,0 +1,77 @@
+service: coffee-shop-api
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+  environment:
+    TABLE_NAME: ${self:custom.tableName}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:Scan
+      Resource: arn:aws:dynamodb:*:*:table/${self:custom.tableName}
+
+functions:
+  createItem:
+    handler: src/handlers/createItem.handler
+    events:
+      - http:
+          path: items
+          method: post
+  getItem:
+    handler: src/handlers/getItem.handler
+    events:
+      - http:
+          path: items/{id}
+          method: get
+  updateItem:
+    handler: src/handlers/updateItem.handler
+    events:
+      - http:
+          path: items/{id}
+          method: put
+  deleteItem:
+    handler: src/handlers/deleteItem.handler
+    events:
+      - http:
+          path: items/{id}
+          method: delete
+  listItems:
+    handler: src/handlers/listItems.handler
+    events:
+      - http:
+          path: items
+          method: get
+
+resources:
+  Resources:
+    ItemsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableName}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAYPERREQUEST
+
+custom:
+  tableName: ${self:service}-${self:provider.stage}
+  stages:
+    - dev
+    - prod
+  serverless-offline:
+    httpPort: 3000
+
+plugins:
+  - serverless-offline
+  - serverless-dynamodb-local

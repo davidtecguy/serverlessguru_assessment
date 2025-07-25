@@ -1,0 +1,23 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# Serverless Framework
+.serverless/
+
+# Logs
+logs/
+*.log
+
+# Environment variables
+.env
+
+# Test coverage
+coverage/
+
+# IDEs and OS
+.vscode/
+.DS_Store
+.idea/ 
