@@ -168,3 +168,29 @@ Or, if you add it as a dev dependency:
 
 **Choose one of the above solutions and re-run your workflow.**  
 If you want to use a specific version, install it explicitly. If you want the latest, just install globally or as a dev dependency. 
+
+---
+
+## How to Fix
+
+### 1. **Install the Plugin as a Dev Dependency**
+Run this in your project root:
+```bash
+npm install --save-dev serverless-offline
+```
+
+### 2. **(Optional) Remove the Plugin from serverless.yml**
+If you do **not** need local emulation (i.e., you don’t use `serverless offline`), you can remove `serverless-offline` from the `plugins:` section in your `serverless.yml`.
+
+---
+
+## Summary
+
+- **If you want to use serverless-offline:**  
+  Install it as shown above.
+- **If you do NOT need it:**  
+  Remove it from your `serverless.yml` under the `plugins:` section.
+
+---
+
+**After making the change, commit and push. Your CI/CD should then work without this error.** 
