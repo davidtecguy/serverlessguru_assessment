@@ -94,3 +94,77 @@ This API is designed for a Coffee Shop to manage its menu items (e.g., add new d
 
 ## License
 MIT 
+
+---
+
+## **How to Fix**
+
+### 1. **Explicitly Install Serverless Framework in Your Workflow**
+
+Add a step in your GitHub Actions workflow to install the latest Serverless Framework globally before running deploy:
+
+```yaml
+- name: Install Serverless Framework
+  run: npm install -g serverless
+```
+
+**Place this step before** the `npx serverless deploy` step.
+
+---
+
+### 2. **(Recommended) Add Serverless as a Dev Dependency**
+
+Add Serverless Framework to your project’s `package.json`:
+
+```bash
+npm install --save-dev serverless
+```
+
+Then, in your workflow, use:
+
+```yaml
+- name: Deploy with Serverless
+  run: npx serverless deploy --stage prod
+```
+
+This ensures the correct version is always available.
+
+---
+
+### 3. **Check for Version Mismatches**
+
+- If you have a `package.json` with a `serverless` version, make sure it matches what you want (v4 is the latest).
+- If you want to use v3, specify it explicitly:
+  ```bash
+  npm install --save-dev serverless@3
+  ```
+
+---
+
+## **Summary of Steps for GitHub Actions**
+
+**Example workflow snippet:**
+```yaml
+- name: Install dependencies
+  run: npm ci
+
+- name: Install Serverless Framework
+  run: npm install -g serverless
+
+- name: Deploy with Serverless
+  run: npx serverless deploy --stage prod
+```
+
+Or, if you add it as a dev dependency:
+```yaml
+- name: Install dependencies
+  run: npm ci
+
+- name: Deploy with Serverless
+  run: npx serverless deploy --stage prod
+```
+
+---
+
+**Choose one of the above solutions and re-run your workflow.**  
+If you want to use a specific version, install it explicitly. If you want the latest, just install globally or as a dev dependency. 

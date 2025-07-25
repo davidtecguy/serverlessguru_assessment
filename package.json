@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "aws-sdk-client-mock": "^4.1.0",
+    "serverless": "^3.40.0",
     "serverless-dynamodb-local": "^0.2.40"
   }
 }
