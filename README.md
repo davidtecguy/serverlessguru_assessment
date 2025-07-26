@@ -127,7 +127,7 @@ Then, in your workflow, use:
   run: npx serverless deploy --stage prod
 ```
 
-This ensures the correct version is always available.
+This ensure the correct version is always available.
 
 ---
 
